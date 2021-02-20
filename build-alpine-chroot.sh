@@ -86,7 +86,7 @@ bootstrap_alpine() {
 
 prepare_chroot() {
   mkdir -p "$MNT_DIR/etc/apk"
-  echo -e "$REPO/$VERSION/main/\n$REPO/$VERSION/community/\n$REPO/$VERSION/testing/" > "$MNT_DIR/etc/apk/repositories"
+  echo -e "$REPO/$VERSION/main/\n$REPO/$VERSION/community/" > "$MNT_DIR/etc/apk/repositories"
   cp /etc/resolv.conf $MNT_DIR/etc/resolv.conf
   cp /usr/bin/qemu-arm-static $MNT_DIR/usr/bin/
   cp provision/default.sh $MNT_DIR/tmp/default.sh
@@ -95,7 +95,7 @@ prepare_chroot() {
 
 setup_chroot() {
   chroot $MNT_DIR qemu-arm-static /bin/sh -C /tmp/default.sh /dev/null 2>/dev/null
-  echo -e "$CDN_REPO/$VERSION/main/\n$CDN_REPO/$VERSION/community/\n$CDN_REPO/$VERSION/testing/" > "$MNT_DIR/etc/apk/repositories"
+  echo -e "$CDN_REPO/$VERSION/main/\n$CDN_REPO/$VERSION/community/" > "$MNT_DIR/etc/apk/repositories"
 }
 
 unmount_system() {
